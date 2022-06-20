@@ -34,5 +34,6 @@ function thirdTask() {
         result[i] = arr[(arr.length - 1) - i];
     }
     console.log(result);
+    return result;
 }
 thirdTask();
