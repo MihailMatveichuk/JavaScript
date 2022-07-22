@@ -19,6 +19,7 @@ function secondTask() {
             arr[i] = arr[i] * 2;
         } else if (typeof(arr[i]) === 'string') {
             arr[i] = `${arr[i]} - done`;
+            123
         }
     }
     console.log(arr);
