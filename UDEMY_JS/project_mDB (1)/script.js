@@ -17,32 +17,4 @@ P.S. Здесь есть несколько вариантов решения з
 
 'use strict';
 
-document.addEventListener('DOMContentLoaded', () => {
-    const movieDB = {
-        movies: [
-            "Логан",
-            "Лига справедливости",
-            "Ла-ла лэнд",
-            "Одержимость",
-            "Скотт Пилигрим против..."
-        ]
-    };
-    const advBlock = document.querySelectorAll('.promo__adv img'),
-        backGr = document.querySelector('.promo__bg'),
-        genre = backGr.querySelector('.promo__genre'),
-        filmsList = document.querySelectorAll('.promo__interactive-item');
-
-    for (let i = 0; i < advBlock.length; i++) {
-        advBlock[i].remove();
-    }
-
-    genre.textContent = "драма";
-
-    backGr.style.backgroundImage = "url('img/bg.jpg')";
-
-    const { movies } = movieDB;
-    let sortMovies = movies.sort();
-    for (let i = 0; i < filmsList.length; i++) {
-        filmsList[i].textContent = `${i + 1}. ${sortMovies[i]}`;
-    }
-});
+// Возьмите свой код из предыдущей практики
