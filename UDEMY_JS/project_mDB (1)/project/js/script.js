@@ -30,19 +30,56 @@ document.addEventListener('DOMContentLoaded', () => {
     const advBlock = document.querySelectorAll('.promo__adv img'),
         backGr = document.querySelector('.promo__bg'),
         genre = backGr.querySelector('.promo__genre'),
-        filmsList = document.querySelectorAll('.promo__interactive-item');
+        movieList = document.querySelector('.promo__interactive-list'),
+        addForm = document.querySelector('form.add'),
+        addInput = addForm.querySelector('.adding__input'),
+        checkbox = addForm.querySelector('[type = "checkbox"]');
+        
+    addForm.addEventListener('submit', (event) => {
+        event.preventDefault();
 
-    for (let i = 0; i < advBlock.length; i++) {
-        advBlock[i].remove();
+        let newFilm = addInput.value;
+        const favorite = checkbox.ariaChecked;
+
+        if(newFilm){
+            if(newFilm.length > 21){
+                newFilm = `${newFilm.substring(0,22)}...`;
+            }
+        movieDB.movies.push(newFilm);
+        sortArr(movieDB.movies);
+        createMovieList(movieDB.movies, movieList);
     }
+        event.target.reset();
+    });
+    const deleteAd = function(arr){
+        arr.forEach(item =>{
+            item.remove();
+        });
+    };
+  
+    const makeChanges = ()=>{
+        genre.textContent = "драма";
 
-    genre.textContent = "драма";
+        backGr.style.backgroundImage = "url('img/bg.jpg')";
+    };
+   
+    const sortArr = (arr) => {
+        arr.sort();
+    };
 
-    backGr.style.backgroundImage = "url('img/bg.jpg')";
-
-    const { movies } = movieDB;
-    let sortMovies = movies.sort();
-    for (let i = 0; i < filmsList.length; i++) {
-        filmsList[i].textContent = `${i + 1}. ${sortMovies[i]}`;
+    function createMovieList (films, parent){
+        parent.innerHTML = "";
+        
+       films.forEach((film, i) => {
+           parent.innerHTML += `
+            <li class="promo__interactive-item">${i + 1}. ${film}
+                <div class="delete"></div>
+            </li>
+        `;
+        });
     }
+    deleteAd(advBlock);
+    makeChanges();
+    sortArr(movieDB.movies);
+    createMovieList(movieDB.movies, movieList);
 });
